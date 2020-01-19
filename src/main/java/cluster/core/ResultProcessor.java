@@ -16,7 +16,7 @@ import cluster.core.command.WorkerCommand;
 import cluster.core.command.data.CompleteProcess;
 import cluster.core.command.worker.UnitExecCommand;
 import cluster.core.command.worker.UnitResult;
-import cluster.core.engine.Aggregator;
+import cluster.core.engine.api.Aggregator;
 import cluster.core.model.AsyncData;
 import static cluster.core.model.DPParams.UNIT_ID;
 

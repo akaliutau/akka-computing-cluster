@@ -3,6 +3,10 @@ package cluster.core.engine;
 import java.util.HashMap;
 import java.util.Map;
 
+import cluster.core.engine.api.Aggregator;
+import cluster.core.engine.api.Processor;
+import cluster.core.engine.api.Splitter;
+
 public class ObjectCreator {
 	private static final Map<Class<? extends Splitter>, Splitter> splitters = new HashMap<>();
 	static {

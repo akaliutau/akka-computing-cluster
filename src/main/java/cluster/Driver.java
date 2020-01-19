@@ -1,4 +1,4 @@
-package cluster.core;
+package cluster;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -15,6 +15,10 @@ import akka.actor.typed.javadsl.Routers;
 import akka.actor.typed.receptionist.Receptionist;
 import akka.actor.typed.receptionist.ServiceKey;
 import akka.cluster.typed.Cluster;
+import cluster.core.DataNode;
+import cluster.core.MasterNode;
+import cluster.core.SessionEventProcessor;
+import cluster.core.Worker;
 import cluster.core.command.DataCommand;
 import cluster.core.command.MasterCommand;
 import cluster.core.command.WorkerCommand;
@@ -27,7 +31,6 @@ import static cluster.core.model.DPParams.*;
 
 public class Driver {
 
-	// https://doc.akka.io/docs/akka/current/typed/routers.html
 	static final ServiceKey<DataCommand> STATS_SERVICE_KEY = ServiceKey.create(DataCommand.class,
 			"ComputeService");
 
@@ -54,7 +57,6 @@ public class Driver {
 
 			}
 			if (cluster.selfMember().hasRole("master")) {
-				System.out.println(Routers.group(STATS_SERVICE_KEY).narrow().toString());
 				ActorRef<DataCommand> serviceRouter = context.spawn(Routers.group(STATS_SERVICE_KEY),
 						"ComputeServiceRouter"); // NOTE: here different key is used!
 				ActorRef<MasterCommand> masterNode = context.spawn(MasterNode.create(serviceRouter), "masterNode");
@@ -68,9 +70,7 @@ public class Driver {
 				
 				masterNode.tell(new InitExecutionSession(process, event));
 
-
 			}
-//			return Behaviors.receive(Void.class).onSignal(Terminated.class, sig -> Behaviors.stopped()).build();
 			return Behaviors.empty();
 		});
 	}

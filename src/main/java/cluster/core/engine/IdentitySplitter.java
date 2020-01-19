@@ -3,6 +3,7 @@ package cluster.core.engine;
 import java.util.Arrays;
 import java.util.List;
 
+import cluster.core.engine.api.Splitter;
 import cluster.core.model.AsyncData;
 
 import static cluster.core.model.DPParams.UNIT_ID;

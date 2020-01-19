@@ -1,5 +1,6 @@
 package cluster.core.engine;
 
+import cluster.core.engine.api.Aggregator;
 import cluster.core.model.AsyncData;
 
 public class SimpleAggregator implements Aggregator {

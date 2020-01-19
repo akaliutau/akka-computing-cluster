@@ -1,5 +1,6 @@
 package cluster.core.engine;
 
+import cluster.core.engine.api.Processor;
 import cluster.core.model.AsyncData;
 
 public class NoneProcessor implements Processor {

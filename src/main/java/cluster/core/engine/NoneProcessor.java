@@ -9,7 +9,7 @@ public class NoneProcessor implements Processor {
 	public AsyncData process(AsyncData data) {
 		AsyncData next = data.clone();
 		next.addEntry("calculated_value", "123");
-		System.out.println("accepted " + next);
+		System.out.println("NoneProcessor added key to the async data object");
 		return next;
 	}
 

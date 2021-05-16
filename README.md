@@ -13,7 +13,8 @@ As a PoC id does not do much and covers the following topics:
 
 Running
 ========
-Run Driver.main() method to instantiate all nodes and to execute a sample process 
+Run Driver.main() method to instantiate all nodes and to execute a sample process defined in <code>cluster.core.engine.NoneProcessor</code>. 
+Obviously one can implement any business logic, the only condition - it must implement Processor interface.
 
 
 References

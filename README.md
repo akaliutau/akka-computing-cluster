@@ -20,6 +20,6 @@ Obviously one can implement any business logic, the only condition - it must imp
 References
 ===========
 
-* [Akka actors] (https://doc.akka.io/docs/akka/current/typed/actors.htm)
+* [Akka actors](https://doc.akka.io/docs/akka/current/typed/actors.htm)
 
 * [Akka cluster](https://doc.akka.io/docs/akka/2.6/typed/cluster.html) features.

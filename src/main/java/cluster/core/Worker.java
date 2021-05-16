@@ -12,6 +12,12 @@ import cluster.core.command.WorkerCommand;
 import cluster.core.command.worker.TimeOut;
 import cluster.core.command.worker.UnitExecCommand;
 import cluster.core.command.worker.UnitResult;
+import cluster.core.engine.ObjectCreator;
+import cluster.core.engine.api.Processor;
+import cluster.core.engine.api.Splitter;
+import cluster.core.model.AsyncData;
+
+import static cluster.core.model.DPParams.PROCESSOR;
 
 /**
  * Encapsulates logic related to execution of class on one computing node
@@ -58,11 +64,11 @@ public final class Worker extends AbstractBehavior<WorkerCommand> {
 
 	private Behavior<WorkerCommand> process(UnitExecCommand command) {
 		getContext().getLog().info("Worker processing request [{}]", command.getWork());
-		// put here execution functionality
-		// this is going to be a blocking code of course
+		AsyncData data = command.getWork();
+		Processor proc = ObjectCreator.create(data.getOrDefault(PROCESSOR, "cluster.core.engine.NoneProcessor"));
+		// NOTE: process method is a blocking code
+		command.getCallback().tell(new UnitResult(proc.process(command.getWork())));
 		getContext().getLog().info("Worker finished his work");
-		
-		command.getCallback().tell(new UnitResult(command.getWork()));
 		return this;
 	}
 }

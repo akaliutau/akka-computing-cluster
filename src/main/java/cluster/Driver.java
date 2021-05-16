@@ -63,7 +63,7 @@ public class Driver {
 				ActorRef<SessionEvent> event = context.spawn(SessionEventProcessor.create(), "emitter");
 				context.watch(event);
 				
-				Thread.sleep(5000);// wait for 5 s to routers spin up
+				Thread.sleep(5000);// IMPORTANT: wait for 5 s to routers to spin up overwise one can get a "Message cannot be delivered" error
 				
 				AsyncData data = new AsyncData().addEntry(PROCESS_NAME, "demo process");
 				DistributedProcess process = new DistributedProcess(data);

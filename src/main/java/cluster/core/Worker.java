@@ -14,7 +14,6 @@ import cluster.core.command.worker.UnitExecCommand;
 import cluster.core.command.worker.UnitResult;
 import cluster.core.engine.ObjectCreator;
 import cluster.core.engine.api.Processor;
-import cluster.core.engine.api.Splitter;
 import cluster.core.model.AsyncData;
 
 import static cluster.core.model.DPParams.PROCESSOR;
@@ -47,7 +46,6 @@ public final class Worker extends AbstractBehavior<WorkerCommand> {
 		return newReceiveBuilder()
 				.onMessage(UnitExecCommand.class, this::process)
 				.onMessageEquals(TimeOut.INSTANCE, this::onTimeout)
-				.onAnyMessage(this::onAny)
 				.build();
 	}
 
@@ -56,12 +54,6 @@ public final class Worker extends AbstractBehavior<WorkerCommand> {
 		return this;
 	}
 	
-	private Behavior<WorkerCommand> onAny(Object msg) {// invoked on clean up message TODO: delete this
-		System.out.println("Worker got a " + msg.toString());
-		return this;
-	}
-
-
 	private Behavior<WorkerCommand> process(UnitExecCommand command) {
 		getContext().getLog().info("Worker processing request [{}]", command.getWork());
 		AsyncData data = command.getWork();

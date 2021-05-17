@@ -17,10 +17,8 @@ import cluster.core.command.SessionCommand;
 import cluster.core.command.master.InitExecutionSession;
 import cluster.core.command.master.CompleteTask;
 import cluster.core.command.session.ExecutionSession;
-import cluster.core.command.session.NotifyClient;
 import cluster.core.event.SessionEvent;
 import cluster.core.event.impl.SessionGranted;
-import cluster.core.event.impl.TaskCompleted;
 import cluster.core.model.AsyncData;
 
 import static cluster.core.model.DPParams.*;

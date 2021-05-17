@@ -21,8 +21,10 @@ import cluster.core.model.AsyncData;
 import static cluster.core.model.DPParams.UNIT_ID;
 
 /**
- * The main class to seed the execution, distribute tasks among nodes and
- * collect the results The life cycle is ending After report to master
+ * The main class responsible for tasks distribution between nodes and
+ * collecting of the results 
+ * 
+ * The life cycle is ending after reporting to master
  * 
  * @author akaliutau
  *
@@ -54,7 +56,9 @@ public final class ResultProcessor extends AbstractBehavior<DataCommand> {
 
 	@Override
 	public Receive<DataCommand> createReceive() {
-		return newReceiveBuilder().onMessage(CompleteProcess.class, this::processResult).build();
+		return newReceiveBuilder()
+				.onMessage(CompleteProcess.class, this::processResult)
+				.build();
 	}
 
 	private Behavior<DataCommand> processResult(CompleteProcess command) {// on each execution of unit
